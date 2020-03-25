@@ -14,6 +14,10 @@
             background: #f2f2f2;
             text-align: center;
         }
+        h1 {
+            padding-bottom: 0.2em;
+            border-bottom: 1px solid lightgray;
+        }
         input {
             padding: 0.2em 0.2em 0.2em 0.2em;
         }
@@ -26,13 +30,18 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <h1>Welcome to Color Palette</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <h4>Enter Hex Color</h4>
                 <div>#   <input id="colorInput" type="text" placeholder="aacbaf">   <button id="submitButton">submit</button></div>
             </div>
             <div class="col">
-                <h4>Current Hex Color</h4>
-                <div id="currColorHex"></div>
-                <div id="currColorRgb"></div>
+                <h4>Current Color</h4>
+                <div>Hex: <span id="currColorHex"></span></div>
+                <div>RGB: <span id="currColorRgb"></span></div>
             </div>
         </div>
     </div>
