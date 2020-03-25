@@ -1,4 +1,4 @@
-# Color Palette
+# [Color Palette](https://inoliao.github.io/color-palette/)
 
 ## Author
 [I-No Liao](https://inoliao.info)
