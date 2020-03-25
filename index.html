@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>Color Palette</title>
+    <meta name="author" content="I-No Liao">
+    <meta name="about" content="Simple color pallete web app for my wife :)">
+
+    <!-- CSS -->
+    <style>
+        .container {
+            margin-top: 5em;
+        }
+        .col {
+            padding: 1em 1em 1em 1em;
+            background: #f2f2f2;
+            text-align: center;
+        }
+        input {
+            padding: 0.2em 0.2em 0.2em 0.2em;
+        }
+    </style>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4>Enter Hex Color</h4>
+                <div>#   <input id="colorInput" type="text" placeholder="aacbaf">   <button id="submitButton">submit</button></div>
+            </div>
+            <div class="col">
+                <h4>Current Hex Color</h4>
+                <div id="currColorHex"></div>
+                <div id="currColorRgb"></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap 4 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script>
+
+    // ---------------------
+    // Function
+    // ---------------------
+
+    const hexDigits = new Array('0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'); 
+
+    const rgb2hex = (rgb) => {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+
+    const hex = (x) => {
+        return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    }
+
+    const updateColor = () => {
+        const colorInputHex = '#' + colorInput.value;
+        if (colorInputHex.length !== 7) {
+            alert('Input hex code should be exactly 6 digits');
+            colorInput.value = '';
+            return;
+        }
+        body.style.background = colorInputHex;
+        currColorHex.innerHTML = colorInputHex;
+        currColorRgb.innerHTML = body.style.background;
+        colorInput.value = '';
+        colorInput.placeholder = colorInputHex.substring(1);
+    }
+
+
+
+    // ---------------------
+    // Main Routine
+    // ---------------------
+
+    // initialize
+    let body = document.getElementsByTagName('body')[0];
+    body.style.background = '#aacbaf';
+    let currColorHex = document.getElementById('currColorHex');
+    currColorHex.innerHTML = rgb2hex(body.style.background);
+    let currColorRgb = document.getElementById('currColorRgb');
+    currColorRgb.innerHTML = body.style.background;
+    let colorInput = document.getElementById('colorInput');
+    let submitButton = document.getElementById('submitButton');
+
+    // listeners
+    submitButton.addEventListener('click', () => {
+        updateColor();
+    });
+
+    colorInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            updateColor();
+        }
+    });
+</script>
